@@ -1,0 +1,47 @@
+{
+    "tasks": [
+        {
+            "label": "Build and Run C++",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "g++.exe -fdiagnostics-color=always -g \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}.exe\" && start \"\" cmd /k \"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+                "env": {
+                    "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+                }
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compile and run the active C++ file in a separate console window"
+        },
+        {
+            "label": "Run C++ Program",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "start \"\" cmd /k \"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+                "env": {
+                    "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+                }
+            },
+            "dependsOn": "Build and Run C++",
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Run the compiled exe in a separate console window"
+        }
+    ],
+    "version": "2.0.0"
+}

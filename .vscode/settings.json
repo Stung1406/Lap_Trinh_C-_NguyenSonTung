@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "iostream": "cpp",
+        "bitset": "cpp",
+        "algorithm": "cpp",
+        "flat_map": "cpp",
+        "flat_set": "cpp",
+        "format": "cpp",
+        "iosfwd": "cpp"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.clearPreviousOutput": true,
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+    },
+    "code-runner.executorMap": {
+        "cpp": "C:\\msys64\\ucrt64\\bin\\g++.exe -g \"$fileName\" -o \"$fileNameWithoutExt.exe\" && start \"\" cmd /k \".\\$fileNameWithoutExt.exe\""
+    }
+}
