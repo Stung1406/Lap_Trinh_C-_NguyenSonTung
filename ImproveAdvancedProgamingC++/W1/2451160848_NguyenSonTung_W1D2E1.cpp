@@ -10,17 +10,17 @@ bool isCP(int n){
 
 int demCP(int n,int a[]){
     int dem=0;
-    for(int i=0;i < n;i++){
+    for(int i=0;i < n;i++)
         if(isCP(a[i])) dem++;
-    }
+    
     return dem;
 }
 
 int demChiaHetCho3(int n,int a[]){
     int dem=0;
-    for(int i = 0;i < n;i++){
+    for(int i = 0;i < n;i++)
         if(a[i] % 3 == 0 ) dem++;
-    }
+    
     return dem;
 }
 
@@ -31,9 +31,7 @@ void inputArray(int n,int a[]){
 }
 
 void outputArray(int n,int a[]){
-    for(int i = 0;i < n;i++){
-		cout<<" "<<a[i];
-	}
+    for(int i = 0;i < n;i++) cout<<" "<<a[i];
 }
 
 int main()
@@ -48,7 +46,7 @@ int main()
 	for(int i = n-1;i >= 0;i--){
 		cout<<" "<<a[i];
 	}
-	cout<<endl<<"Day co "<<demChiaHetCho3(n,a)<<" so chia het cho 3"<<endl;
-	cout<<"Day co "<<demCP(n,a)<<" so chinh phuong";
+	cout<<endl<<"Day co "<<demChiaHetCho3(n,a)<<" so chia het cho 3."<<endl;
+	cout<<"Day co "<<demCP(n,a)<<" so chinh phuong.";
 	return 0;
 }
