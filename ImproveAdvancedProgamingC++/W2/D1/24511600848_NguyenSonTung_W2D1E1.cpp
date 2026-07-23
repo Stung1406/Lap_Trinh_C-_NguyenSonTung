@@ -23,6 +23,6 @@ int main()
     cout<<"Nhap n = "; cin>>n;
     inputMatrix(n,a);
     cout<<"Nhap cot k = "; cin>>k;
-    cout<<"Phan tu nho nhat o cot "<<k<<" la: "<<minColumK(n,a,k);
+    cout<<"Phan tu nho nhat trong cot "<<k<<" la: "<<minColumK(n,a,k);
     return 0;
 }
