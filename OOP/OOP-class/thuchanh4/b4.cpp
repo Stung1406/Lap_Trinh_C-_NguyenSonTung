@@ -1,112 +1,186 @@
-#include<iostream>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-class Nguoi{
+class Nguoi {
 private:
-	string hoten;		
+    string hoten;
+
 public:
-	virtual void nhap();
-	virtual void xuat();
-	virtual bool thuong()=0;
-	friend ostream& operator<< (ostream& outputStream,Nguoi& n);
-	friend istream& operator>> (istream& inputStream,Nguoi& n);
+    virtual ~Nguoi() {}
+
+    virtual void nhap();
+    virtual void xuat();
+    virtual bool thuong() = 0;
+
+    friend ostream& operator<<(ostream& outputStream, Nguoi& n);
+    friend istream& operator>>(istream& inputStream, Nguoi& n);
 };
 
-class SinhVien : public Nguoi{
-public:
-	void nhap();
-	void xuat();
-	bool thuong();
+class SinhVien : public Nguoi {
 private:
-	double dtb;
+    double dtb;
+
+public:
+    void nhap();
+    void xuat();
+    bool thuong();
 };
 
-class GiangVien : public Nguoi{
-public:
-	void nhap();
-	void xuat();  
-	bool thuong(); 
+class GiangVien : public Nguoi {
 private:
-	int sobaibao;
-}; 
+    int sobaibao;
 
-class NhanVien : public Nguoi{
 public:
-	void nhap();
-	void xuat();  
-	bool thuong(); 
-private:
-	int songaynghi;
+    void nhap();
+    void xuat();
+    bool thuong();
 };
 
-int main ()
-{
-	Nguoi *ds[100];
-	int chon,k=0;
-	while(true)
-	{
-		cout<<"GV/SV/NV/Thoat/(1,2,3,4):"; cin>>chon;
-		cin.ignore();
-		if(chon == 1) ds[k] = new GiangVien;
-		if(chon == 2) ds[k] = new SinhVien;
-		if(chon == 3) ds[k] = new NhanVien;
-		if(chon == 4) break;
-		ds[k]->nhap();
-		k++;
-	}
-	for(int i=0;i<k;i++){
-		if(ds[i]->thuong()) ds[i]->xuat();
-	}
-	return 0;
+class NhanVien : public Nguoi {
+private:
+    int songaynghi;
+
+public:
+    void nhap();
+    void xuat();
+    bool thuong();
+};
+
+//====================== MAIN ======================
+
+int main() {
+    int n;
+
+    cout << "Nhap so luong nguoi: ";
+    cin >> n;
+
+    // Cấp phát động mảng con trỏ
+    Nguoi **ds = new Nguoi*[n];
+
+    for (int i = 0; i < n; i++) {
+        int chon;
+
+        cout << "\n===== Nguoi thu " << i + 1 << " =====\n";
+        cout << "1. Giang vien\n";
+        cout << "2. Sinh vien\n";
+        cout << "3. Nhan vien\n";
+        cout << "Chon: ";
+        cin >> chon;
+        cin.ignore();
+
+        switch (chon) {
+        case 1:
+            ds[i] = new GiangVien();
+            break;
+        case 2:
+            ds[i] = new SinhVien();
+            break;
+        case 3:
+            ds[i] = new NhanVien();
+            break;
+        default:
+            cout << "Lua chon khong hop le! Mac dinh tao SinhVien.\n";
+            ds[i] = new SinhVien();
+        }
+
+        ds[i]->nhap();
+    }
+
+    cout << "\n========== DANH SACH DUOC KHEN THUONG ==========\n";
+
+    for (int i = 0; i < n; i++) {
+        if (ds[i]->thuong())
+            ds[i]->xuat();
+    }
+
+    // Giải phóng bộ nhớ
+    for (int i = 0; i < n; i++)
+        delete ds[i];
+
+    delete[] ds;
+
+    return 0;
 }
 
-void Nguoi :: nhap(){
-	cout<<"Nhap ho ten: "; getline(cin,hoten);
-}
-void Nguoi :: xuat(){
-	cout<<"Ho ten: "<<hoten<<endl; 
+//====================== NGUOI ======================
+
+void Nguoi::nhap() {
+    cout << "Nhap ho ten: ";
+    getline(cin, hoten);
 }
 
-void SinhVien :: nhap(){
-	cout<<"Nhap thong tin sinh vien: "<<endl;
-	Nguoi :: nhap();
-	cout<<"Nhap diem trung binh cua sinh vien: "; cin>>dtb;
+void Nguoi::xuat() {
+    cout << "Ho ten: " << hoten << endl;
 }
 
-void SinhVien :: xuat(){
-	cout<<"Thong tin sinh vien duoc khen thuong: "<<endl;
-	Nguoi :: xuat();
-	cout<<"Diem trung binh cua sinh vien la: "<<dtb<<endl;
-}
-bool SinhVien :: thuong(){
-	return dtb>8;
-}
-void GiangVien::nhap(){
-	cout<<"Nhap thong tin giang vien: "<<endl;
-	Nguoi :: nhap();
-	cout<<"Nhap so bai bao cua giang vien: "; cin>>sobaibao;
-}
-void GiangVien :: xuat(){
-	cout<<"Thong tin giang vien duoc khen thuong: "<<endl;
-	Nguoi :: xuat();
-	cout<<"So bai bao cua giang vien: "<<sobaibao<<endl;
-}   
-bool GiangVien :: thuong(){
-	return sobaibao>3;
-}
-void NhanVien::nhap(){
-	cout<<"Nhap thong tin nhan vien: "<<endl;
-	Nguoi :: nhap();
-	cout<<"Nhap so ngay nghi cua nhan vien: "; cin>>songaynghi;
-}
-void NhanVien :: xuat(){
-	cout<<"Thong tin nhan vien duoc khen thuong: "<<endl;
-	Nguoi :: xuat();
-	cout<<"So ngay nghi cua giang vien: "<<songaynghi<<endl;
-}   
-bool NhanVien :: thuong(){
-	return songaynghi<5;
+ostream& operator<<(ostream& outputStream, Nguoi& n) {
+    n.xuat();
+    return outputStream;
 }
 
+istream& operator>>(istream& inputStream, Nguoi& n) {
+    n.nhap();
+    return inputStream;
+}
 
+//====================== SINH VIEN ======================
+
+void SinhVien::nhap() {
+    cout << "\nNhap thong tin Sinh Vien\n";
+    Nguoi::nhap();
+    cout << "Nhap diem trung binh: ";
+    cin >> dtb;
+    cin.ignore();
+}
+
+void SinhVien::xuat() {
+    cout << "\n*** Sinh Vien duoc khen thuong ***\n";
+    Nguoi::xuat();
+    cout << "Diem TB: " << dtb << endl;
+}
+
+bool SinhVien::thuong() {
+    return dtb > 8;
+}
+
+//====================== GIANG VIEN ======================
+
+void GiangVien::nhap() {
+    cout << "\nNhap thong tin Giang Vien\n";
+    Nguoi::nhap();
+    cout << "Nhap so bai bao: ";
+    cin >> sobaibao;
+    cin.ignore();
+}
+
+void GiangVien::xuat() {
+    cout << "\n*** Giang Vien duoc khen thuong ***\n";
+    Nguoi::xuat();
+    cout << "So bai bao: " << sobaibao << endl;
+}
+
+bool GiangVien::thuong() {
+    return sobaibao > 3;
+}
+
+//====================== NHAN VIEN ======================
+
+void NhanVien::nhap() {
+    cout << "\nNhap thong tin Nhan Vien\n";
+    Nguoi::nhap();
+    cout << "Nhap so ngay nghi: ";
+    cin >> songaynghi;
+    cin.ignore();
+}
+
+void NhanVien::xuat() {
+    cout << "\n*** Nhan Vien duoc khen thuong ***\n";
+    Nguoi::xuat();
+    cout << "So ngay nghi: " << songaynghi << endl;
+}
+
+bool NhanVien::thuong() {
+    return songaynghi < 5;
+}

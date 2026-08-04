@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    int x,n; 
+    int x,n;
     cout<<"Nhap n: "; cin>>n;
     cout<<"Nhap x: "; cin>>x;
     double S = 1;

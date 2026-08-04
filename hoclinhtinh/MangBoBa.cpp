@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void input(int &n,int a[]){
 	cout<<"Nhap n: "; cin>>n;
 	for(int i=0;i<n;i++){
@@ -12,7 +11,7 @@ void input(int &n,int a[]){
 
 int demMang(int n,int a[]){
 	int dem=0;
-	for(int i=0;i<n;i++){
+	for(int i=1;i<n-1;i++){
 		if(a[i]==a[i-1]+a[i+1]) dem++;
 	}
 	return dem;
@@ -42,4 +41,4 @@ int main()
 	solution(n,a);
 	return 0;
 }
- 
+
