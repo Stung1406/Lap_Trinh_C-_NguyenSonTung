@@ -13,6 +13,16 @@ void thayThe(string &str,string s1,string s2){
     }
 }
 
+void chen(string &str,string s1,string s2){
+    int pos = str.find(s2);
+    if(pos == -1) cout<<"Khong tim thay xau can thay the trong xau ban dau.";
+    else
+    {
+        str.insert(pos,s1 + " ");
+        cout<<"Xau sau khi thay the la: "<<str;
+    }
+}
+
 int main()
 {
     string str,s1,s2;

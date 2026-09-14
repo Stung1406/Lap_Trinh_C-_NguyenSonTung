@@ -4,11 +4,23 @@ using namespace std;
 
 class HoaDon{
 public:
-    HoaDon();
-    HoaDon(int sl,double gc);
-    double tongTien();
-    void setGiaCa(double gc);
-    void inHoaDon();
+    HoaDon() : soLuong(1), giaCa(10) {}
+    HoaDon(int sl, double gc) : soLuong(sl), giaCa(gc) {}
+
+    double tongTien() {
+        return this->soLuong * this->giaCa;
+    }
+
+    void setGiaCa(double gc) {
+        this->giaCa = gc;
+    }
+
+    void inHoaDon() {
+        cout << "So luong: " << this->soLuong << endl;
+        cout << "Gia ca : " << this->giaCa << endl;
+        cout << "So tien phai thanh toan: " << this->tongTien() << endl;
+    }
+
 private:
     int soLuong;
     double giaCa;
@@ -16,40 +28,29 @@ private:
 
 class HoaDonKm : public HoaDon{
 public:
-    HoaDonKm();
-    HoaDonKm(int sl,double gc,double gg);
-    double thanhToan();
-    void inHoaDon();
+    HoaDonKm() : HoaDon(), giamGia(2) {}
+    HoaDonKm(int sl, double gc, double gg) : HoaDon(sl, gc), giamGia(gg) {}
+
+    double thanhToan() {
+        return this->tongTien() - this->giamGia;
+    }
+
+    void inHoaDon() {
+        HoaDon::inHoaDon();
+        cout << "Giam gia: " << this->giamGia << endl;
+        cout << "Hoa don thanh toan: " << this->thanhToan();
+    }
+
 private:
     double giamGia;
 };
 
 int main()
 {
-	HoaDon hd1(18,38);
-	hd1.inHoaDon(); cout<<endl;
-	HoaDonKm km1(3,10,5),km2;
-	km1.inHoaDon(); cout<<endl;
-	km2.inHoaDon(); 
+    HoaDon hd1(18, 38);
+    hd1.inHoaDon(); cout << endl;
+    HoaDonKm km1(3, 10, 5), km2;
+    km1.inHoaDon(); cout << endl;
+    km2.inHoaDon();
     return 0;
-}
-HoaDon::HoaDon() : soLuong(1),giaCa(10){}
-HoaDon::HoaDon(int sl,double gc) : soLuong(sl),giaCa(gc){}
-double HoaDon::tongTien() {return soLuong*giaCa;}
-void HoaDon::setGiaCa(double gc)  {giaCa = gc;}
-void HoaDon::inHoaDon() 
-{
-    cout<<"So luong: "<<soLuong<<endl;
-    cout<<"Gia ca : "<<giaCa<<endl;
-    cout<<"So tien phai thanh toan: "<<tongTien()<<endl;
-}
-HoaDonKm::HoaDonKm() : HoaDon(),giamGia(2) {} 
-HoaDonKm::HoaDonKm(int sl,double gc,double gg) : HoaDon(sl,gc),giamGia(gg) {}
-double HoaDonKm::thanhToan(){
-	return tongTien() - giamGia;
-}
-void HoaDonKm::inHoaDon(){
-	HoaDon::inHoaDon(); // tan dung toan bo ma da co cua lop cha  
-	cout<<"Giam gia: "<<giamGia<<endl;
-	cout<<"Hoa don thanh toan: "<<thanhToan();
 }

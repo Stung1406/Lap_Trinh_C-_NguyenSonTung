@@ -26,7 +26,6 @@ int demSo(string s){
     return dem;
 }
 
-
 bool matKhauManh(string s){
     if(s.length() < 8 || s.length() > 20) return false;
     
@@ -45,4 +44,13 @@ int main()
     if(matKhauManh(s)) cout<<"Mat khau hop le"<<endl;
     else cout<<"Mat khau khong hop le"<<endl;
     return 0;
+}
+
+
+int gt(int  n){
+    int gt = 1;
+    for(int i=1;i<=n;i++){
+        gt = gt * i;
+    }
+    return gt;
 }

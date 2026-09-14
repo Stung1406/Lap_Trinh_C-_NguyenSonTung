@@ -6,8 +6,8 @@ using namespace std;
 int *inputArray(int *a,int n){
     a = new int[100];
     for(int i=0;i<n;i++){
-        cout<<"a["<<i+1<<"] = "; 
-        cin >> *(a+i);
+        cout<<"a["<<i+1<<"] = ";
+        cin >> *(a+i) ;
     }
     return a;
 }
@@ -29,13 +29,13 @@ int main()
 {
     int *a,n;
     cout<<"N = "; cin>>n;
-    a = inputArray(a,n);
+    a = inputArray(a,n);  //
     if(dem100(a,n) == 0) cout<<"Khong co so nao";
     else
     {
         cout<<"KQ:";
         printIndex(a,n);
     }
-    delete a;
+    delete [] a;
     return 0;
 }
