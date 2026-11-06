@@ -1,24 +1,26 @@
 #include<iostream>
 #include<string>
+#include<iomanip>
+#include<limits>
 
 using namespace std;
 
 class SinhVien{
 public:
 	SinhVien();
-	SinhVien(string t,int m,char gt);
+	SinhVien(string t,int m,string gt);
 	void nhapDL();
 	void hienThi();
-	string getTen(); 
+	string getTen();
 	int getMa();
-	char getGioiTinh();
+	string getGioiTinh();
 	void setTen(string t);
 	void setMa(int m);
-	void setGioiTinh(char gt);
+	void setGioiTinh(string gt);
 private:
 	string tensv;
 	int masv;
-	char gioitinh;
+	string gioitinh;
 };
 
 class KhoaHoc{
@@ -42,7 +44,7 @@ private:
 class HocBong : public SinhVien,public KhoaHoc{
 public:
 	HocBong();
-	HocBong(string t1,int m,char gt,string t2,int hk,string md,double gtr);
+	HocBong(string t1,int m,string gt,string t2,int hk,string md,double gtr);
 	double getGiaTri();
 	void setGiaTri(double gt);
 	void nhapDL();
@@ -62,14 +64,16 @@ int main()
 	return 0;
 }
 
-SinhVien::SinhVien() : tensv("Nguyen Van A"),masv(1),gioitinh('M') {}
-SinhVien::SinhVien(string t,int m,char gt) : tensv(t),masv(m),gioitinh(gt){}
+SinhVien::SinhVien() : tensv("Nguyen Son Bach"),masv(1),gioitinh("Nam") {}
+SinhVien::SinhVien(string t,int m,string gt) : tensv(t),masv(m),gioitinh(gt){}
 void SinhVien::nhapDL(){
-	cout<<"Nhap ten: "; 
+	cout<<"Nhap ten: ";
 	getline(cin,tensv);
-	cout<<"Nhap ma sinh vien: "; cin>>masv;
-	cin.ignore();
-	cout<<"Nhap gioi tinh: "; cin>>gioitinh;
+	cout<<"Nhap ma sinh vien: ";
+	cin>>masv;
+	cin.ignore(numeric_limits<streamsize>::max(),'\n');
+	cout<<"Nhap gioi tinh: ";
+	getline(cin,gioitinh);
 }
 void SinhVien::hienThi(){
 	cout<<"Ten: "<<tensv<<endl;
@@ -82,7 +86,7 @@ string SinhVien::getTen(){
 int SinhVien::getMa(){
 	return masv;
 }
-char SinhVien::getGioiTinh(){
+string SinhVien::getGioiTinh(){
 	return gioitinh;
 }
 void SinhVien::setTen(string t){
@@ -91,28 +95,30 @@ void SinhVien::setTen(string t){
 void SinhVien::setMa(int m){
 	masv=m;
 }
-void SinhVien::setGioiTinh(char gt){
+void SinhVien::setGioiTinh(string gt){
 	gioitinh=gt;
 }
 
-KhoaHoc :: KhoaHoc() : tenkh("Ky su Cong Nghe thong tin"),hocky(1),mucdo("Trung binh"){}
-KhoaHoc :: KhoaHoc(string t,int hk,string md) : tenkh(t),hocky(hk),mucdo(md) {}
+KhoaHoc::KhoaHoc() : tenkh("Ky su Cong Nghe thong tin"),hocky(1),mucdo("Trung binh"){}
+KhoaHoc::KhoaHoc(string t,int hk,string md) : tenkh(t),hocky(hk),mucdo(md) {}
 void KhoaHoc::nhapDl(){
-	cin.ignore();
-	cout<<"Nhap ten khoa hoc: "; getline(cin,tenkh);
-	cout<<"Nhap hoc ky: "; cin>>hocky;
-	cin.ignore();
-	cout<<"Nhap muc do: "; getline(cin,mucdo);
+	cout<<"Nhap ten khoa hoc: ";
+	getline(cin,tenkh);
+	cout<<"Nhap hoc ky: ";
+	cin>>hocky;
+	cin.ignore(numeric_limits<streamsize>::max(),'\n');
+	cout<<"Nhap muc do: ";
+	getline(cin,mucdo);
 }
-void KhoaHoc :: hienThi(){
+void KhoaHoc::hienThi(){
 	cout<<"Ten khoa hoc: "<<tenkh<<endl;
 	cout<<"Hoc ky: "<<hocky<<endl;
 	cout<<"Muc do: "<<mucdo<<endl;
 }
-string KhoaHoc :: getTen(){
+string KhoaHoc::getTen(){
 	return tenkh;
 }
-void KhoaHoc :: setTen(string t){
+void KhoaHoc::setTen(string t){
 	tenkh=t;
 }
 int KhoaHoc::getHocKy(){
@@ -121,27 +127,29 @@ int KhoaHoc::getHocKy(){
 void KhoaHoc::setHocKy(int hk){
 	hocky=hk;
 }
-string KhoaHoc ::  getMucDo(){
+string KhoaHoc::getMucDo(){
 	return mucdo;
 }
 void KhoaHoc::setMucDo(string md){
 	mucdo=md;
 }
-HocBong :: HocBong() : SinhVien(),KhoaHoc(),giatri(30000000){}
-HocBong :: HocBong(string t1,int m,char gt,string t2,int hk,string md,double gtr) : SinhVien(t1,m,gt),KhoaHoc(t2,hk,md),giatri(gtr) {}
-double HocBong :: getGiaTri(){
+
+HocBong::HocBong() : SinhVien(),KhoaHoc(),giatri(30000000){}
+HocBong::HocBong(string t1,int m,string gt,string t2,int hk,string md,double gtr) : SinhVien(t1,m,gt),KhoaHoc(t2,hk,md),giatri(gtr) {}
+double HocBong::getGiaTri(){
 	return giatri;
 }
-void HocBong :: setGiaTri(double gtr){
+void HocBong::setGiaTri(double gtr){
 	giatri=gtr;
 }
 void HocBong::nhapDL(){
 	SinhVien::nhapDL();
 	KhoaHoc::nhapDl();
-	cout<<"Nhap gia tri hoc bong: "; cin>>giatri;
+	cout<<"Nhap gia tri hoc bong: ";
+	cin>>giatri;
 }
 void HocBong::hienthi(){
 	SinhVien::hienThi();
 	KhoaHoc::hienThi();
-	cout<<"Gia tri hoc bong: "<<giatri;
+	cout<<"Gia tri hoc bong: "<<fixed<<setprecision(0)<<giatri<<endl;
 }

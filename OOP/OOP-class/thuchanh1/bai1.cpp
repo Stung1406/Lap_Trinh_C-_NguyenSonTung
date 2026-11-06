@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-
 class TamGiac{
 private:
 //sử dụng các biến nội bộ nên viết các hàm đấy vào trong private
@@ -24,7 +23,7 @@ public:
 
 int main()
 {
-    TamGiac(3,4,5).xacDinhTamGiac(); 
+    TamGiac(3,4,5).xacDinhTamGiac();
     return 0;
 }
 
@@ -37,7 +36,7 @@ void TamGiac::xacDinhTamGiac() const{
     if(isTamGiac()){
         if(isDeu()) cout<<"Tam giac deu";
         else if(isCan()) cout<<"Tam giac can";
-        else cout<<"Tam giac thuong";         
+        else cout<<"Tam giac thuong";
     }else{
         cout<<"Khong la tam giac";
     }

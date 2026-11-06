@@ -1,8 +1,7 @@
-#include <iostream>
+ int getTen() {
+        return this->tenThuoc;
+    }
 
-using namespace std;
-
-main(){
-cout<<"Dat sex"; 
-return 0; 
-}
+    void setTenThuoc(int mt) {
+        this->tenThuoc = mt;
+    }

@@ -17,5 +17,6 @@
     },
     "code-runner.executorMap": {
         "cpp": "C:\\msys64\\ucrt64\\bin\\g++.exe -g \"$fileName\" -o \"$fileNameWithoutExt.exe\" && start \"\" cmd /k \".\\$fileNameWithoutExt.exe\""
-    }
+    },
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }
