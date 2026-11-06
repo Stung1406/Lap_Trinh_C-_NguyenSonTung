@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "C++: Build and Debug Active File (MSYS2)",
+            "name": "C++: Build and Debug Active File (MSYS2 UCRT64)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
@@ -30,7 +30,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build and Run C++"
+            "preLaunchTask": "Build C++"
         }
     ]
 }

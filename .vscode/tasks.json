@@ -1,12 +1,17 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build and Run C++",
-            "type": "shell",
-            "command": "cmd",
+            "label": "Build C++",
+            "type": "process",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
-                "/c",
-                "g++.exe -fdiagnostics-color=always -g \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}.exe\" && start \"\" cmd /k \"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                "-std=c++17",
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}",
@@ -21,27 +26,28 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Compile and run the active C++ file in a separate console window"
+            "detail": "Compile the active C++ file with MSYS2 UCRT64"
         },
         {
             "label": "Run C++ Program",
-            "type": "shell",
-            "command": "cmd",
-            "args": [
-                "/c",
-                "start \"\" cmd /k \"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-            ],
+            "type": "process",
+            "command": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "dependsOn": "Build C++",
+            "dependsOrder": "sequence",
             "options": {
                 "cwd": "${fileDirname}",
                 "env": {
                     "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
                 }
             },
-            "dependsOn": "Build and Run C++",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true
+            },
             "group": "test",
             "problemMatcher": [],
-            "detail": "Run the compiled exe in a separate console window"
+            "detail": "Build and run the active C++ file in the VS Code terminal"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
